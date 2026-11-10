@@ -1,0 +1,10 @@
+node_modules
+.env
+backend/.env
+frontend/.env
+.dist
+dist/
+.vite
+coverage
+.DS_Store
+docker-data
