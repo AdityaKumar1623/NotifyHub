@@ -1,0 +1,375 @@
+<mxfile host="app.diagrams.net" modified="2026-11-12T03:59:14Z" agent="ChatGPT" version="24.7.17" type="device">
+  <diagram id="b24ebd01-9e2" name="01 - HLD Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="NOTIFYHUB — HIGH-LEVEL SYSTEM DESIGN" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="980" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ui" value="&lt;b&gt;React dashboard&lt;/b&gt;&lt;br&gt;Overview • Dispatch Studio&lt;br&gt;Batch • Telemetry • DLQ&lt;br&gt;Resilience Lab" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="170" width="250" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="client" value="&lt;b&gt;Browser clients&lt;/b&gt;&lt;br&gt;Axios = REST&lt;br&gt;EventSource = SSE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="365" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="&lt;b&gt;Express API&lt;/b&gt;&lt;br&gt;Routes + controllers&lt;br&gt;/api/v1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="390" y="170" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mw" value="&lt;b&gt;Middleware&lt;/b&gt;&lt;br&gt;JSON • CORS • Rate limit&lt;br&gt;Idempotency • Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="390" y="330" width="270" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="mongo" value="&lt;b&gt;MongoDB + Mongoose&lt;/b&gt;&lt;br&gt;Notification records&lt;br&gt;Templates • status • errors&lt;br&gt;jobId unique index" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="165" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="&lt;b&gt;Redis + BullMQ&lt;/b&gt;&lt;br&gt;notification-queue&lt;br&gt;Priority • attempts • backoff" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="165" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="dlq" value="&lt;b&gt;Dead-letter queue&lt;/b&gt;&lt;br&gt;notification-dlq&lt;br&gt;Failed after retries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDECEC;strokeColor=#C94A4A;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="405" width="240" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="worker" value="&lt;b&gt;Notification worker&lt;/b&gt;&lt;br&gt;Concurrency: 4 configured&lt;br&gt;Load template • validate&lt;br&gt;render • dispatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1380.0" y="165" width="250" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="provider" value="&lt;b&gt;Provider adapters&lt;/b&gt;&lt;br&gt;EMAIL • SMS • WEBHOOK&lt;br&gt;SMTP / SMS API / HTTP POST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EC;strokeColor=#38934A;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1380.0" y="365" width="250" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="events" value="&lt;b&gt;Event bus + SSE&lt;/b&gt;&lt;br&gt;Lifecycle events streamed&lt;br&gt;to connected dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="405" width="230" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="User interaction" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ui" target="client">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="REST" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="client" target="api">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="415" />
+              <mxPoint x="345" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="api" target="mw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="Create / read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="mw" target="mongo">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="341.5" />
+              <mxPoint x="710" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="Enqueue job" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="mw" target="redis">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1170" y="376" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="Consume job" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.4815;entryDx=0;entryDy=0;" edge="1" parent="1" source="redis" target="worker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="Deliver" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="worker" target="provider">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="Update status" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="worker" target="mongo">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1505" y="110" />
+              <mxPoint x="875" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="Final failure" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#C94A4A;fontColor=#C94A4A;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="worker" target="dlq">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1335" y="279.75" />
+              <mxPoint x="1335" y="457.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="Emit event" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#168C8C;fontColor=#168C8C;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="worker" target="events">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1670" y="232.5" />
+              <mxPoint x="1670" y="560" />
+              <mxPoint x="1020" y="560" />
+              <mxPoint x="1020" y="457.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="SSE stream" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#168C8C;fontColor=#168C8C;labelBackgroundColor=#FFFFFF;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="events" target="client">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="806" y="545" />
+              <mxPoint x="175" y="545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note1" value="&lt;b&gt;HTTP 202&lt;/b&gt; means accepted for asynchronous processing, not proof that the recipient received or read the message." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=12;spacing=8;align=left;spacingLeft=12;spacingRight=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="610" width="750" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" value="&lt;b&gt;Reliability:&lt;/b&gt; retries can duplicate external sends if a provider accepted a request but the worker failed before saving success. Use provider idempotency / deduplication where possible." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=12;spacing=8;align=left;spacingLeft=12;spacingRight=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="850" y="610" width="780.0" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="note3" value="API and worker are logically separated by a queue. Do not call this microservices unless independently deployed and operated as separate services. In-process SSE needs shared pub/sub for multi-instance fan-out." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=12;spacing=8;align=left;spacingLeft=12;spacingRight=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="730" width="1580.0" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;font color=&quot;#526273&quot;&gt;&lt;b&gt;━━&lt;/b&gt; Request / command&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#168C8C&quot;&gt;&lt;b&gt;╌╌&lt;/b&gt; Async event / stream&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#C94A4A&quot;&gt;&lt;b&gt;━━&lt;/b&gt; Failure / retry&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;fontSize=12;fontColor=#334155;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="28" width="560" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="c00266c8-e14" name="02 - Request Lifecycle">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="END-TO-END NOTIFICATION FLOW — STEP BY STEP" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="980" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="a" value="1. User selects recipient, channel,&lt;br&gt;priority, template and data." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="b" value="2. React validates form and sends&lt;br&gt;REST request using Axios." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="140" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c" value="3. Express checks CORS, rate limit,&lt;br&gt;idempotency and request body." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="140" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d" value="4. Controller validates payload&lt;br&gt;and generates unique jobId." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="310" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e" value="5. MongoDB creates notification&lt;br&gt;record with QUEUED status." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="310" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="f" value="6. BullMQ adds job to Redis with&lt;br&gt;priority and retry configuration." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="310" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g" value="7. Worker consumes job&lt;br&gt;(up to 4 concurrent jobs)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="500" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h" value="8. Worker loads template, checks&lt;br&gt;required variables and renders it." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="500" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="i" value="9. Provider adapter attempts&lt;br&gt;EMAIL / SMS / WEBHOOK delivery." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EC;strokeColor=#38934A;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="500" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j" value="10. Worker stores DELIVERED or&lt;br&gt;failure details in MongoDB." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="690" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="k" value="11. Backend emits lifecycle event;&lt;br&gt;SSE sends it to browser." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="690" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="l" value="12. Dashboard updates status,&lt;br&gt;event history and metrics." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=14;align=center;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="690" width="420" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="a" target="b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="b" target="c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c" target="d">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="d" target="e">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="e" target="f">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="f" target="g">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="g" target="h">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="h" target="i">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="i" target="j">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="j" target="k">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="k" target="l">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="failure" value="&lt;b&gt;Failure path:&lt;/b&gt; provider error / timeout → retry with exponential backoff (configured as 4 attempts, 2-second base) → after final failure mark FAILED and place job in DLQ for inspection / replay." style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=12;spacing=8;align=left;spacingLeft=12;spacingRight=10;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="50" y="850" width="1560" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;font color=&quot;#526273&quot;&gt;&lt;b&gt;━━&lt;/b&gt; Request / command&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#168C8C&quot;&gt;&lt;b&gt;╌╌&lt;/b&gt; Async event / stream&lt;/font&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;font color=&quot;#C94A4A&quot;&gt;&lt;b&gt;━━&lt;/b&gt; Failure / retry&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;fontSize=12;fontColor=#334155;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="28" width="560" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="sfail" value="on error" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#C94A4A;fontColor=#C94A4A;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="i" target="failure">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1650" y="545" />
+              <mxPoint x="1650" y="895" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="cf72d94e-e5f" name="03 - Components APIs Deployment">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1160" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="COMPONENT DESIGN, API SURFACE AND DEPLOYMENT" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1500" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="front" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;FRONTEND — React + Vite&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• Overview / health&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Dispatch Studio&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Batch send&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Live Telemetry&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• DLQ replay&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Resilience Lab&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Axios: REST calls&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;EventSource: SSE&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="130" width="348" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="back" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;BACKEND — Node.js + Express&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• server bootstrap&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• CORS + JSON parsing&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• rate limiter / idempotency&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• routes + controllers&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• template service&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• provider adapters&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• health + analytics&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• SSE endpoint&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="468" y="130" width="348" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="data" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;DATA / QUEUE&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;MongoDB + Mongoose&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Notification docs • templates&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;status • attempts • errors&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Redis + BullMQ&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Queue/job state • priority&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;retry/backoff • DLQ&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="885" y="130" width="348" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="infra" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;INFRASTRUCTURE&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Docker Compose&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Redis 7 • MongoDB 7&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Persistent volumes&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Health checks&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;External services:&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;SMTP / SMS provider / webhook receiver&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EC;strokeColor=#38934A;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="1302" y="130" width="348" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="routes" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;KEY API ENDPOINTS (relative to /api/v1)&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;POST /notifications/send — create one job (typically 202)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;POST /notifications/batch — submit batch&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /notifications/:jobId — inspect status&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /notifications/dlq — list failed notifications&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;POST /notifications/dlq/:jobId/retry — replay failed job&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /analytics — dashboard metrics&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /chaos/status — read fault-injection state&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;POST /chaos/toggle — change test fault flags&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /templates — list templates&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /events/stream — SSE subscription&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;GET /health — health check&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#7A8794;fontColor=#243244;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="530" width="780" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="env" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;CONFIGURATION / DEPLOYMENT&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;PORT — API listener&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;MONGODB_URI — database connection&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;REDIS_URL — Redis connection&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;CORS_ORIGIN — allowed frontend origin&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;RATE_LIMIT_WINDOW_MS / RATE_LIMIT_MAX_REQUESTS&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Provider credentials must remain backend-side.&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Deployment: static frontend + Node backend + managed MongoDB + Redis. Configure production URLs, CORS, secrets and health checks.&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#7A8794;fontColor=#243244;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="530" width="780" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="secure" value="&lt;div style=&quot;line-height:1.5&quot;&gt;&lt;b&gt;Production hardening:&lt;/b&gt; authentication/RBAC • webhook SSRF protection • strict payload validation • provider timeouts • logs/metrics/tracing • retention/redaction • shared idempotency • reconciliation for MongoDB/Redis dual-write failures.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=14;align=left;verticalAlign=middle;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1000" width="1600" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=block;startFill=1;startSize=6;" edge="1" parent="1" source="front" target="back">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=block;startFill=1;startSize=6;" edge="1" parent="1" source="back" target="data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="external provider calls" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;spacing=3;strokeColor=#168C8C;fontColor=#168C8C;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="back" target="infra">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="642" y="92" />
+              <mxPoint x="1476" y="92" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="req-0001" name="04 - Requirements">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="REQUIREMENTS — FUNCTIONAL AND NON-FUNCTIONAL" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1000" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="fr" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;FUNCTIONAL REQUIREMENTS&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR1&lt;/b&gt;  Send one notification over EMAIL / SMS / WEBHOOK&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR2&lt;/b&gt;  Priority levels HIGH / MEDIUM / LOW (queue priority 1 / 5 / 10)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR3&lt;/b&gt;  Templates with variables; validate required vars, then render&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR4&lt;/b&gt;  Batch ingest of 1–50 notifications per request&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR5&lt;/b&gt;  Idempotent single sends (replay-safe within 5 min)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR6&lt;/b&gt;  Async delivery: 4 attempts, exponential backoff (2s base)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR7&lt;/b&gt;  Dead-letter queue: list failed jobs and retry them manually&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR8&lt;/b&gt;  Status lifecycle: QUEUED → PROCESSING → DELIVERED / FAILED&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR9&lt;/b&gt;  Real-time dashboard updates via SSE&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR10&lt;/b&gt; Status lookup per jobId + aggregate analytics / metrics&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;FR11&lt;/b&gt; Chaos toggle to inject provider faults for testing&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="780" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="nfr" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;NON-FUNCTIONAL REQUIREMENTS  (targets)&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Availability&lt;/b&gt;  99.9% on the ingest path; a provider outage must not block 202s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Latency&lt;/b&gt;  POST → 202 p99 &amp;lt; 200 ms; HIGH-priority delivery p95 &amp;lt; 5 s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Throughput&lt;/b&gt;  10M notifications/day ≈ 120/s avg, ≈ 1.2K/s peak (see tab 05)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Durability&lt;/b&gt;  Mongo record written before enqueue; Redis AOF on&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Delivery&lt;/b&gt;  At-least-once; duplicates possible if the ack is lost&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Consistency&lt;/b&gt;  Eventual: 202 means accepted, not delivered&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Scalability&lt;/b&gt;  Stateless API; workers scale horizontally (see tab 06)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Fault isolation&lt;/b&gt;  Queue buffers bursts and slow providers&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Observability&lt;/b&gt;  Per-job status, event history, metrics endpoint&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Security&lt;/b&gt;  CORS, rate limit, 2 MB body cap today; authN/RBAC + SSRF guard still to add&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Retention&lt;/b&gt;  Mongo 30 days (target); failed jobs kept 24 h in Redis&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="110" width="780" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="actors" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;ACTORS&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• Client apps / services calling the REST API&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Operators using the React dashboard (DLQ, metrics, chaos)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• External providers: SMTP, SMS gateway, customer webhooks&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="580" width="780" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="scope" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;OUT OF SCOPE TODAY&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• Auth / multi-tenancy / per-tenant quotas&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Push notifications and in-app inbox&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Unsubscribe / user preference management&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Delivery receipts from carriers (DLRs)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDECEC;strokeColor=#C94A4A;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="580" width="780" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="rnote" value="&lt;div style=&quot;line-height:1.5&quot;&gt;Targets marked above are design goals for the scale scenario on tabs 05–06, not measured results. Idempotency currently covers /notifications/send only, not /notifications/batch.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=14;align=left;verticalAlign=middle;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="840" width="1600" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="boe-0001" name="05 - Back-of-Envelope">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1230" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="BACK-OF-ENVELOPE ESTIMATIONS" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1000" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="asm" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;1. ASSUMPTIONS&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• Scale scenario: &lt;b&gt;10M notifications/day&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Mix: 70% email, 20% SMS, 10% webhook&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Latency: email 0.3 s, SMS 1.2 s (code default), webhook 0.5 s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Blended ≈ &lt;b&gt;0.5 s&lt;/b&gt; per job&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Peak = 10× average (OTP / campaign bursts)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• 5% transient failure → ~15% extra attempts (worst case)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Mongo doc ≈ 1.5 KB; Redis job ≈ 1 KB&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="507" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="traffic" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;2. TRAFFIC&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;10M / 86,400 s ≈ &lt;b&gt;116/s → ~120/s avg&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Peak 10× ≈ &lt;b&gt;1,200/s&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;With retries (×1.15) ≈ &lt;b&gt;1,400 sends/s&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Batch of 50 → peak ≈ 24 API req/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Single sends → peak ≈ 1,200 API req/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Provider mix at peak: ~840 email, 240 SMS, 120 webhook per s&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="597" y="110" width="507" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="conc" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;3. WORKERS (Little's Law)&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;In-flight = rate × latency&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;1,200/s × 0.5 s = &lt;b&gt;600 concurrent jobs&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;At concurrency 4 → &lt;b&gt;150 workers&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;At concurrency 50 (I/O bound) → &lt;b&gt;~12 workers&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Today: 1 process × 4 ÷ 0.5 s ≈ &lt;b&gt;8 jobs/s ≈ 0.7M/day&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EA;strokeColor=#4C9A4C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="1143" y="110" width="507" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="store" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;4. STORAGE&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Mongo: 10M × 1.5 KB = &lt;b&gt;15 GB/day&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;30 days ≈ &lt;b&gt;450 GB&lt;/b&gt;; 1 year ≈ 5.5 TB (needs TTL / archive)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Redis backlog: 10 min lag × 1.2K/s = 720K jobs ≈ &lt;b&gt;0.7 GB&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Idempotency keys: 1.2K/s × 300 s × ~0.5 KB ≈ &lt;b&gt;0.3 GB&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;DLQ at 0.5% permanent failure ≈ &lt;b&gt;50K jobs/day&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="500" width="507" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="ops" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;5. DATASTORE OPS AT PEAK&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Redis ≈ 30 cmds per notification (rate limit, idempotency, BullMQ enqueue + worker)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;1,200 × 30 ≈ &lt;b&gt;36K ops/s&lt;/b&gt; → ~1/3 of one Redis node&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Mongo ≈ 3 writes per notification (insert + 2 status updates)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;1,200 × 3 ≈ &lt;b&gt;3.6K writes/s&lt;/b&gt; → near single-node limit&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="597" y="500" width="507" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="sse" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;6. SSE FAN-OUT&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 3 lifecycle events per notification&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;1,200 × 3 = 3.6K events/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Server writes every event to every client&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;× 50 open dashboards = &lt;b&gt;180K socket writes/s&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Hidden hotspot: grows with events × clients&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDECEC;strokeColor=#C94A4A;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="1143" y="500" width="507" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="rl" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;7. RATE LIMIT CHECK&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Limit: 100 req/min per API key (or IP) = 1.7 req/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Single sends: 100 notifications/min per key&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Batch (50 each): 5,000/min ≈ 83/s per key&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Peak 1,200/s needs ~15 keys sending batches, or a raised limit&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="830" width="780" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="sum" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;SUMMARY&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;Today ≈ &lt;b&gt;8/s&lt;/b&gt; vs avg need &lt;b&gt;120/s&lt;/b&gt; (15× short) and peak &lt;b&gt;1,200/s&lt;/b&gt; (150× short).&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;First walls: worker concurrency, then Mongo writes, then SSE fan-out.&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="830" width="780" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="bnote" value="&lt;div style=&quot;line-height:1.5&quot;&gt;All numbers are rough estimates from config + stated assumptions. Not load-tested; real provider latency will move the worker counts directly.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=14;align=left;verticalAlign=middle;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1090" width="1600" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="scl-0001" name="06 - Scalability &amp; Capacity">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1470" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="SCALABILITY AND CURRENT CAPACITY" style="text;html=1;align=left;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#14243A;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1000" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="now" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;CURRENT CAPACITY (as coded)&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;API + worker:&lt;/b&gt; one Node process (worker is required in server.js)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Worker:&lt;/b&gt; concurrency 4 → ≈ 8 jobs/s at 0.5 s avg&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Daily ceiling:&lt;/b&gt; ≈ 0.7M notifications&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Rate limit:&lt;/b&gt; 100 req/min per key&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Batch:&lt;/b&gt; max 50 per request, body ≤ 2 MB&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Redis / Mongo:&lt;/b&gt; single node each (Docker Compose)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;SSE:&lt;/b&gt; in-memory client set, broadcasts all events&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Retries:&lt;/b&gt; 4 attempts, 2s/4s/8s backoff, then DLQ&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="780" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="bn" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;BOTTLENECKS (in the order they hit)&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;1.&lt;/b&gt; Worker concurrency + shared process with API (CPU contention)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;2.&lt;/b&gt; Rate limiter caps one key at ~83/s even with batches&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;3.&lt;/b&gt; Single Mongo: ~3.6K writes/s at target peak&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;4.&lt;/b&gt; SSE broadcast to all clients: events × clients&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;5.&lt;/b&gt; Single Redis: queue + rate limit + idempotency share one node&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;6.&lt;/b&gt; Slow provider (6 s webhook timeout) can hold concurrency slots&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDECEC;strokeColor=#C94A4A;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="110" width="780" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="s0" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;STAGE 0 — Now&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 8/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 0.7M/day&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Single process, single Redis + Mongo&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A78C2;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="490" width="332" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;STAGE 1 — 10×&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 100/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Split worker into its own process&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Concurrency 20–50&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Tune rate limit per key&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="472" y="490" width="332" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;STAGE 2 — 100×&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 1.2K/s (target peak)&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;12+ workers, 2+ API behind LB&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Mongo replica set + TTL&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;SSE via Redis pub/sub, per-tenant&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EA;strokeColor=#4C9A4C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="895" y="490" width="332" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;STAGE 3 — 1000×&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;≈ 10K+/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Queue per channel + priority&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Shard Mongo by time / recipient&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;Redis Cluster, Kafka for ingest&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F6F4;strokeColor=#168C8C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="1318" y="490" width="332" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s0s1" value="add worker proc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s0" target="s1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s1s2" value="add LB + replicas" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s2s3" value="shard + partition" style="edgeStyle=orthogonalEdgeStyle;rounded=1;arcSize=12;html=1;endArrow=block;endFill=1;endSize=6;strokeWidth=2;fontSize=11;fontStyle=1;strokeColor=#526273;fontColor=#526273;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="s2" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="scale" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;HOW EACH PIECE SCALES&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;API:&lt;/b&gt; stateless, add instances behind a load balancer&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Workers:&lt;/b&gt; separate process, scale out by queue depth; BullMQ locks make multi-worker safe&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Queue:&lt;/b&gt; Redis persistence on; Cluster / per-channel queues later&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Mongo:&lt;/b&gt; replica set first (reads + failover), shard when writes pass ~5K/s&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;SSE:&lt;/b&gt; move events to Redis pub/sub so any API node can fan out; filter per tenant&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;&lt;b&gt;Providers:&lt;/b&gt; per-provider concurrency caps and circuit breaker so one slow provider cannot starve others&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E3;strokeColor=#D28A27;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="750" width="1600" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="triggers" value="&lt;div style=&quot;font-size:18px;font-weight:bold;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,0.18)&quot;&gt;SCALE-UP TRIGGERS&lt;/div&gt;&lt;div style=&quot;margin-top:14px;margin-bottom:8px;line-height:1.4&quot;&gt;• Queue wait time p95 &amp;gt; 5 s for HIGH priority → add workers&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Mongo write latency p95 &amp;gt; 50 ms → replica set / shard&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• Redis ops &amp;gt; 60% of node capacity → split rate-limit / idempotency off the queue Redis&lt;/div&gt;&lt;div style=&quot;margin-top:0px;margin-bottom:8px;line-height:1.4&quot;&gt;• DLQ growth &amp;gt; 1% of volume → investigate provider, not capacity&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF7EA;strokeColor=#4C9A4C;strokeWidth=2;fontColor=#14243A;fontSize=15;align=left;verticalAlign=top;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1070" width="1600" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="cnote" value="&lt;div style=&quot;line-height:1.5&quot;&gt;Stages are rough orders of magnitude from the estimates on tab 05. Validate with a load test (k6 / autocannon against /notifications/send) before committing to numbers.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFF9D9;strokeColor=#D6B656;fontColor=#4A3B12;fontSize=14;align=left;verticalAlign=middle;spacing=14;spacingLeft=18;spacingRight=14;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1330" width="1600" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
